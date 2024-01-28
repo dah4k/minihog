@@ -1,9 +1,8 @@
 services:
   livebook:
-    #image: ghcr.io/livebook-dev/livebook
     build:
       context: .
-      dockerfile: docker/Dockerfile.livebook
+      dockerfile: docker/Dockerfile.parrot
     ports:
       - 8090:8090
       - 8091:8091
