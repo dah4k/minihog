@@ -1,0 +1,12 @@
+services:
+  livebook:
+    #image: ghcr.io/livebook-dev/livebook
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.livebook
+    ports:
+      - 8090:8090
+      - 8091:8091
+    environment:
+      - LIVEBOOK_PORT=8090
+      - LIVEBOOK_IFRAME_PORT=8091
