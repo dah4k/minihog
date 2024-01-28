@@ -1,0 +1,4 @@
+Vagrant.configure("2") do |config|
+  # https://download.opensuse.org/tumbleweed/appliances/openSUSE-MicroOS.x86_64-ContainerHost-Vagrant.box
+  config.vm.box = "opensuse/MicroOS-ContainerHost.x86_64"
+end
