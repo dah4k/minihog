@@ -3,21 +3,17 @@ FROM ghcr.io/livebook-dev/livebook
 ARG TZ=Etc/UTC
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-    && apt-get install --assume-yes --no-install-recommends gnupg2 vim \
-    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys ED444FF07D8D0BF6 \
-    && echo "deb http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware" > /etc/apt/sources.list.d/kali-tools.list \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install --assume-yes --no-install-recommends kali-tools-top10 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && apt-get install --assume-yes --no-install-recommends pipx \
+    && apt-get install --assume-yes --no-install-recommends ca-certificates curl file gdb gnupg2 nmap pipx tshark termshark vim \
+    && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CDFB5FA52007B954 \
+    && echo "deb https://apt.metasploit.com/ buster main" > /etc/apt/sources.list.d/metasploit.list \
+    && apt-get update \
+    && apt-get install --assume-yes --no-install-recommends metasploit-framework \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pipx install volatility3
+
+RUN curl -L -o $HOME/.gdbinit-gef.py https://gef.blah.cat/py \
+ && echo source $HOME/.gdbinit-gef.py >> ~/.gdbinit
+
 ENV PATH="$HOME/.local/bin:$PATH"
